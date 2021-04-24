@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import Book from '../../components/Book/Book'
+import FormAdd from '../../components/FormAdd/FormAdd'
+
 
 class Books extends Component{
 
@@ -12,7 +14,30 @@ class Books extends Component{
         ]
     }
 
+    deleteBookHandler = (bookId) => {
+        
+        const posDelBook = this.state.books.findIndex((elem,bookId) => {
+            return elem.id === bookId
+        })
+
+        if(posDelBook){
+
+            // Copy du books state (immutabilityx)
+            const copyBooks = [...this.state.books]
+            
+            const newState = copyBooks.filter(elem => {
+                return elem.id !== bookId
+            })
+
+            // ou newState = copyBooks.splice(posDelBook,1)
+            this.setState({
+                books: newState
+            })
+        }
+    }
+
     render(){
+
         return(
             <>
                 <table className="table text-center">
@@ -29,13 +54,21 @@ class Books extends Component{
                             this.state.books.map(book => {
                                 return(
                                     <tr key={book.id}>
-                                        <Book title={book.title} author={book.author} pagesNumber={book.pagesNumber}/>
+                                        <Book 
+                                            title={book.title} 
+                                            author={book.author} 
+                                            pagesNumber={book.pagesNumber}
+                                            deleteBook={() => this.deleteBookHandler(book.id)}
+                                        />
                                     </tr>
                                 )
                             })
                         }
                     </tbody>
                 </table>  
+
+                {/* If my boolean is true so I add a form */}
+                {this.props.addBook && <FormAdd />}
             </>
         )
     }
