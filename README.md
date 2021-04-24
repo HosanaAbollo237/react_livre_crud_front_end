@@ -15,11 +15,17 @@ Patienter puis une page s'ouvrira sur votre navigateur à : [http://localhost:30
 
 ## Etapes de la création de ce projet : 
 
+
 -   Ajout des CDN (CSS + JS) de bootstrap
--   Création du composant Titre
+
+-   Création du composant Title
     -   Ajout de la propriéte **props.children**
     -   Insertion de données texte depuis App.js dans le composant Titre via la propriété **props.children**
 
 -   Création du composant Button :
     -   Définition des propriétés (typeBtn, clic)
     -   Utilisation des ces dernières dans App.js
+
+-   Création du composant Books
+    -   Ce component est un container, il listera tout les livres dans une table 
+    -   Affichage des livres en les récupérant dans le state via une itération 

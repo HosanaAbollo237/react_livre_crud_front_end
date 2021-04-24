@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import TitleH1 from './components/Title/TitleH1'
 import MyButton from './components/Button/MyButton'
+import Books from './containers/Books/Books'
 
 class App extends Component {
+  
   render(){
-    
+
     return(
       <div className="container">
-        <TitleH1> Page listant les livres</TitleH1>
-        <div>Livres</div>
-        <MyButton typeBtn="btn-success" clic={() => console.log('ajout')}>AJouter</MyButton>
-        <MyButton typeBtn="btn-warning" clic={() => console.log('modifier')}>Modifier</MyButton>
-        <MyButton typeBtn="btn-danger"  clic={() => console.log('supprimer')}>Supprimer</MyButton>
+        <TitleH1> Page listing books</TitleH1>
+        <Books/>
+        <MyButton typeBtn="btn-success" css="w-100" clic={() => console.log('add')}>Add</MyButton>
       </div>
     )
   }

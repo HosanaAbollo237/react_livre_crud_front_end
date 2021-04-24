@@ -2,7 +2,7 @@ import React from 'react'
 
 const MyButton = (props) => {
 
-    let btnCss = `btn ${props.typeBtn}`
+    let btnCss = `btn ${props.typeBtn} ${props.css}`
 
     return(
         <>
