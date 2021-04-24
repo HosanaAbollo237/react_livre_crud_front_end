@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
-import TitreH1 from './components/Titre/TitreH1'
-import Button from './components/Button/Button'
+import TitleH1 from './components/Title/TitleH1'
+import MyButton from './components/Button/MyButton'
 
 class App extends Component {
   render(){
     
     return(
       <div className="container">
-        <TitreH1> Page listant les livres</TitreH1>
+        <TitleH1> Page listant les livres</TitleH1>
         <div>Livres</div>
-        <Button typeBtn="btn-success" clic={() => console.log('ajout')}>AJouter</Button>
-        <Button typeBtn="btn-warning" clic={() => console.log('modifier')}>Modifier</Button>
-        <Button typeBtn="btn-danger" clic={() => console.log('supprimer')}>Supprimer</Button>
+        <MyButton typeBtn="btn-success" clic={() => console.log('ajout')}>AJouter</MyButton>
+        <MyButton typeBtn="btn-warning" clic={() => console.log('modifier')}>Modifier</MyButton>
+        <MyButton typeBtn="btn-danger"  clic={() => console.log('supprimer')}>Supprimer</MyButton>
       </div>
     )
   }
