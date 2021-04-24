@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MyButton from '../../components/Button/MyButton'
+import Book from '../../components/Book/Book'
 
 class Books extends Component{
 
@@ -11,6 +11,7 @@ class Books extends Component{
             {id:4, title: "Dharana Darshan", author:"Swami Nirajanananda", pagesNumber:400}
         ]
     }
+
     render(){
         return(
             <>
@@ -23,23 +24,25 @@ class Books extends Component{
                             <th colSpan="2">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                            {this.state.books.map(book => {
-                                return (   
-                                        <tr key={book.id}>
-                                            <td >{book.title}</td>
-                                            <td>{book.author}</td>
-                                            <td>{book.pagesNumber}</td>
-                                            <td><MyButton typeBtn="btn-warning" clic={() => console.log('change')}>Change</MyButton></td>
-                                            <td><MyButton typeBtn="btn-danger" clic={() => console.log('delete')}>Delete</MyButton></td>
-                                        </tr>  
+                    <tbody>  
+                        {
+                            this.state.books.map(book => {
+                                return(
+                                    <tr key={book.id}>
+                                        <Book title={book.title} author={book.author} pagesNumber={book.pagesNumber}/>
+                                    </tr>
                                 )
-                            })}
+                            })
+                        }
                     </tbody>
-                </table>
+                </table>  
             </>
         )
     }
-}
 
+
+
+}
+            
+                    
 export default Books;
