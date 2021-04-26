@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Book from '../../components/Book/Book'
 import FormAdd from './FormAdd/FormAdd'
 import ChangeForm from './FormChange/FormChange'
+import Alert from '../../components/Alert/Alert'
 
 class Books extends Component{
 
@@ -13,7 +14,19 @@ class Books extends Component{
             {id:4, title: "Dharana Darshan", author:"Swami Nirajanananda", pagesNumber:400},
         ],
         idLastBook: 4,
-        idBookToChange: 0
+        idBookToChange: 0,
+        isAlertOpen: false,
+        msgAlert: "",
+        alertCss: ""    
+        /* Il aurait été préférable de créer un objet comme ceci et faire le test comme indiqué plus en dessous: 
+            AlertMessage: {
+                message: null,      
+                type: ""
+            }  
+
+           { (AlertMessage.message && <Alert typeAlert={this.state.AlertMessage.type}>{this.state.AlertMessage.message}</Alert>) }
+        */
+
     }
 
     /* Fonction permettant d'ajouter un livre, a envoyer au formAdd */
@@ -35,11 +48,14 @@ class Books extends Component{
         {
             return {
                 books: newBooksArr,
-                idLastBook: prevState.idLastBook + 1
+                idLastBook: prevState.idLastBook + 1,
+                isAlertOpen: true,
+                alertCss: 'alert-success',
+                msgAlert: 'Livre envoyé avec succès'
             }
         })
-
         this.props.closeAddBookForm()
+        this.closeAlert()
     }
 
     /* Fonction permettant de supprimer un livre */
@@ -60,9 +76,13 @@ class Books extends Component{
 
             // ou newState = copyBooks.splice(posDelBook,1)
             this.setState({
-                books: newBooksArr
+                books: newBooksArr,
+                isAlertOpen: true,
+                alertCss: 'alert-danger',
+                msgAlert: 'Livre supprimé avec succès'
             })
         }
+        this.closeAlert();
     }
 
     changeBookHandler = (id,title,author,pagesNumber) =>{
@@ -86,15 +106,31 @@ class Books extends Component{
 
         this.setState({
                 books: newBooksArr,
-                idBookToChange: 0
+                idBookToChange: 0,
+                isAlertOpen: true,
+                alertCss: 'alert-warning',
+                msgAlert: 'Livre changé avec succès'
         })
 
+        this.closeAlert();
+
+    }
+
+    closeAlert(){
+        setTimeout(() => {
+            this.setState({
+                isAlertOpen: false
+            })
+        }, 3000);
     }
 
     render(){
 
         return(
             <>
+                
+               {this.state.isAlertOpen && <Alert typeAlert={this.state.alertCss}>{this.state.msgAlert}</Alert> }
+
                 <table className="table text-center">
                     <thead>
                         <tr className="table-dark text-white">
