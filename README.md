@@ -49,4 +49,42 @@ Partie 2 : FORMULAIRE
     -   Récupération de la référence de la fonction changeBookHandler vers la propriété validation afin de faire partir les nouvelles données vers le composant parent (Books)
 
     -   Création d'un message d'alert adequate en fonction de la CUD d'un livre
-    
+
+    Partie 3 : Validation des formulaires
+
+    -   Formulaire d'ajout avec Formik
+        -   Installer formik avec la commande: 
+        `npm install --save formik`
+        -   Récupération de la fonction withFormik:
+        `import {withFormik} from formik`
+        -   Pour utiliser cette fontion il faudra la placer au niveau de **export default** et renseigner un objet a formik pour lui indiquer les actions qu'il devra faire (3 propriétés):
+        `export default withFormik({ **ici se situera les actions** })(FormAdd)`
+
+        -   Voici la syntaxe: 
+        `export default withFormik({   `
+        `    mapPropsToValues: () => ({` -->placer inputs aux props de formik, on retourne un objet contenant title, author et pagesNumber
+                `title:'',`              --> cela correspond à ce qu'on faisait au niveau des states, (1) :     on peut supprimer le state
+                `author:'',`                
+                `pagesNumber:''`
+        `    }),`
+        `    validate: values => {`
+``
+        `    },`
+        `    handleSubmit: (values,(props)) => {`  ---> methode lancée lors de la validation du formulaire
+        `        `                                 ---> elle remplace validateFormHandleer
+        `    }`                     `              ---> values permet d'acceder à title, author et pagesNumber
+        `})(FormAdd);`                             ---> props permet d'utiliser la prop validation envoyée par le composant books
+
+        Pour plus d'informations: https://jaredpalmer.com/formik/docs/api/withFormik
+
+        - La valeur de la prop name des inputs doit etre la meme que celle renseigné dans mapPropsToValues
+        -   Maintenant **value={this.state.authorInput}** deviendra value={this.props.values.author}
+            Et on aura onChange={(event) => {this.setState({authorInput: event.target.value})}}
+            qui sera remplacé par onChange={this.props.handleChange}
+        - Maintenant tester avec le react developper tool si la prop values de l'objet FormAdd prend en considération les changements
+
+        
+
+
+
+

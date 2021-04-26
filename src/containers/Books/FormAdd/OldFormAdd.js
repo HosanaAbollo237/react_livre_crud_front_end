@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Button from '../../../components/Button/Button'
-import {withFormik} from 'formik'
+
 
 class FormAdd extends Component{
     
@@ -39,8 +39,10 @@ class FormAdd extends Component{
 
                         <div className="form-control">    
                             <label htmlFor="title" />Title<label />
-                            <input onChange={this.props.handleChange}  
-                                   value={this.props.values.title} 
+                            <input onChange={(event) => {
+                                {/* mIse a jours su state lors de la saisie utilisateur */}
+                                this.setState({titleInput: event.target.value})}}  
+                                   value={this.state.titleInput} 
                                    type="text" 
                                    className="form-control" 
                                    name="title" 
@@ -49,8 +51,8 @@ class FormAdd extends Component{
 
                         <div className="form-control">
                             <label htmlFor="author" />Author<label />
-                            <input onChange={this.props.handleChange}  
-                                   value={this.props.values.author}
+                            <input onChange={(event) => {this.setState({authorInput: event.target.value})}}  
+                                   value={this.state.authorInput}
                                    type="text" 
                                    className="form-control" 
                                    name="author" 
@@ -59,8 +61,8 @@ class FormAdd extends Component{
 
                         <div className="form-control">
                             <label htmlFor="pagesNumber" />Pages Number<label />
-                            <input onChange={this.props.handleChange}  
-                                   value={this.props.values.pagesNumber}
+                            <input onChange={(event) => {this.setState({pagesNumberInput: event.target.value})}}  
+                                   value={this.state.pagesNumberInput}
                                    type="text" 
                                    className="form-control" 
                                    name="pagesNumber" 
@@ -68,42 +70,11 @@ class FormAdd extends Component{
                         </div>
                         
                     </fieldset>
-                    <Button typeBtn="btn-primary" clic={this.props.handleSubmit}>Submit</Button>               
+                    <Button typeBtn="btn-primary" clic={this.validateFormHandler}>Submit</Button>               
                 </form>
             </div>  
         )
     }
 }
 
-export default withFormik({
-    // Retourne un objet de props correspondant a l'attribut name du formulaire
-    mapPropsToValues: () => ({
-        title:'',
-        author:'',
-        pagesNumber:''
-    }),
-    validate: values => {
-
-    },
-    handleSubmit: (values,{props}) => {
-        props.validation(values.title,values.author,values.pagesNumber)
-    }
-})(FormAdd);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default FormAdd;
