@@ -1,15 +1,15 @@
 import React from 'react'
-import MyButton from '../Button/MyButton'
+import Button from '../Button/Button'
 
 const Book = (props) => {
     
     return (
         <>     
-                <td>{props.title}</td>
-                <td>{props.author}</td>
-                <td>{props.pagesNumber}</td>
-                <td><MyButton typeBtn="btn-warning" clic={() => console.log('change')}>Change</MyButton></td>
-                <td><MyButton typeBtn="btn-danger" clic={props.deleteBook}>Delete</MyButton></td>
+            <td>{props.title}</td>
+            <td>{props.author}</td>
+            <td>{props.pagesNumber}</td>
+            <td><Button typeBtn="btn-warning" clic={props.changeBook}>Change</Button></td>
+            <td><Button typeBtn="btn-danger" clic={props.deleteBook}>Delete</Button></td>
         </>
     )
     

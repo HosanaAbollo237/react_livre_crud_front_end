@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MyButton = (props) => {
+const Button = (props) => {
 
     let btnCss = `btn ${props.typeBtn} ${props.css}`
 
@@ -11,4 +11,4 @@ const MyButton = (props) => {
     )
 }
 
-export default MyButton;
+export default Button;
