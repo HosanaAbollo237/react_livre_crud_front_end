@@ -17,14 +17,15 @@ class Books extends Component{
         idBookToChange: 0,
         isAlertOpen: false,
         msgAlert: "",
-        alertCss: ""    
-        /* Il aurait été préférable de créer un objet comme ceci et faire le test comme indiqué plus en dessous: 
+        alertCss: ""   
+
+        /* (!!) Il aurait été préférable de créer un objet comme ceci et faire le test comme indiqué plus en dessous: 
             AlertMessage: {
                 message: null,      
                 type: ""
             }  
 
-           { (AlertMessage.message && <Alert typeAlert={this.state.AlertMessage.type}>{this.state.AlertMessage.message}</Alert>) }
+           { (!!) (AlertMessage.message && <Alert typeAlert={this.state.AlertMessage.type}>{this.state.AlertMessage.message}</Alert>) }
         */
 
     }
@@ -54,13 +55,14 @@ class Books extends Component{
                 msgAlert: 'Livre envoyé avec succès'
             }
         })
-        this.props.closeAddBookForm()
-        this.closeAlert()
+        this.props.closeAddBookForm() // fermeture du formulaire d'ajout de livre
+        this.closeAlert() // fermeture de l'alert
     }
 
     /* Fonction permettant de supprimer un livre */
     deleteBookHandler = (bookId) => {
         
+        // Récupération de l'index du livre dans le tableau de livres
         const posDelBook = this.state.books.findIndex((elem,bookId) => {
             return elem.id === bookId
         })
@@ -70,11 +72,12 @@ class Books extends Component{
             // Copy du books state (immutabilityx)
             const copyBooks = [...this.state.books]
             
+            // Creation d'un nouveau tableau de livres en filtrant l'id du book a supprimer
             const newBooksArr = copyBooks.filter(elem => {
                 return elem.id !== bookId
             })
+            // ou newBookArr = copyBooks.splice(posDelBook,1)
 
-            // ou newState = copyBooks.splice(posDelBook,1)
             this.setState({
                 books: newBooksArr,
                 isAlertOpen: true,
@@ -85,9 +88,10 @@ class Books extends Component{
         this.closeAlert();
     }
 
+    // Fonction permettant de modifier un livre
     changeBookHandler = (id,title,author,pagesNumber) =>{
 
-        // On recupere l'index du livre qu'on a changé 
+        // Récupération de l'index du livre dans le tableau de livres
         const bookIndex = this.state.books.findIndex(elem => {
             return elem.id === id
         })
@@ -99,11 +103,12 @@ class Books extends Component{
             author:author,
             pagesNumber: pagesNumber
         }
-        // Ca aurait pu s'ecrire au aussi ainsi newBook{id,title,author,pagesNumber}
+        // Ca aurait pu s'ecrire l'objet newBook ainsi : newBook{id,title,author,pagesNumber}
 
         const newBooksArr = [...this.state.books]
         newBooksArr[bookIndex] = newBook
 
+        // MAJ du state
         this.setState({
                 books: newBooksArr,
                 idBookToChange: 0,
@@ -112,10 +117,11 @@ class Books extends Component{
                 msgAlert: 'Livre changé avec succès'
         })
 
-        this.closeAlert();
+        this.closeAlert(); // (1) redondant .. la solution a ce pb est au niveau des states
 
     }
 
+    // (1) Function permettant de fermet la fenetre d'alerte
     closeAlert(){
         setTimeout(() => {
             this.setState({
@@ -128,7 +134,7 @@ class Books extends Component{
 
         return(
             <>
-                
+            {/* Preferable de faire comme (!!) */}
                {this.state.isAlertOpen && <Alert typeAlert={this.state.alertCss}>{this.state.msgAlert}</Alert> }
 
                 <table className="table text-center">
@@ -160,7 +166,7 @@ class Books extends Component{
                                         </tr>
                                     )
                                 } else {
-
+                                    /* on focus sur le row du book a changé (via le test de son id) */
                                     return(
                                         <tr key={book.id}>
                                             <ChangeForm 

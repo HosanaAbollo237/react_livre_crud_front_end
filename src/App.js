@@ -24,7 +24,9 @@ class App extends Component {
 
     return(
       <div className="container">
+        {/* Composant titre */}
         <TitleH1> Page listing books</TitleH1>
+        {/* Composant books */}
         <Books addBook={this.state.isClickedAddBook} closeAddBookForm={() => {this.setState({
             isClickedAddBook: false
         })}} />

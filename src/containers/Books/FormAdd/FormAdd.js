@@ -40,6 +40,7 @@ class FormAdd extends Component{
                         <div className="form-control">    
                             <label htmlFor="title" />Title<label />
                             <input onChange={(event) => {
+                                {/* mIse a jours su state lors de la saisie utilisateur */}
                                 this.setState({titleInput: event.target.value})}}  
                                    value={this.state.titleInput} 
                                    type="text" 
@@ -50,7 +51,6 @@ class FormAdd extends Component{
 
                         <div className="form-control">
                             <label htmlFor="author" />Author<label />
-
                             <input onChange={(event) => {this.setState({authorInput: event.target.value})}}  
                                    value={this.state.authorInput}
                                    type="text" 

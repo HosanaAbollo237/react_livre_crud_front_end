@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Composant bouton
 const Button = (props) => {
 
     let btnCss = `btn ${props.typeBtn} ${props.css}`
