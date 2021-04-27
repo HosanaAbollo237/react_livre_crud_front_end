@@ -188,7 +188,7 @@ class Books extends Component{
                     La reference this.addBookHandler permet d'nevoyer un livre au formulaire d'ajout
                     La propriéré validation sera exécutée au niveau du formAdd afin de récupérer les donnée d'un livre
                 */}
-                {this.props.addBook && <FormAdd validation={this.addBookHandler} />}}
+                {this.props.addBook && <FormAdd validation={this.addBookHandler} />}
             </>
         )
     }

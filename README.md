@@ -11,7 +11,7 @@ Avec la commande : `git clone https://github.com/HosanaAbollo237/react_livre_cru
 Avec une invite de commande aller dans le dossier ./react_livre_crud_front_end avec la commande
 `cd react_livre_crud_front_end`
 Puis lancer l'app avec la commande 'npm start' ou 'yarn start' ( pour ceux qui possèdent yarn)
-Patienter puis une page s'ouvrira sur votre navigateur à : [http://localhost:3000](http://localhost:3000) t
+Patienter puis une page s'ouvrira sur votre navigateur à : [http://localhost:3000](http://localhost:3000) 
 
 ## Etapes de la création de ce projet : 
 
@@ -75,13 +75,35 @@ Partie 2 : FORMULAIRE
         `    }`                     `              ---> values permet d'acceder à title, author et pagesNumber
         `})(FormAdd);`                             ---> props permet d'utiliser la prop validation envoyée par le composant books
 
-        Pour plus d'informations: https://jaredpalmer.com/formik/docs/api/withFormik
+        Pour plus d'informations: [https://jaredpalmer.com/formik/docs/api/withFormik](https://jaredpalmer.com/formik/docs/api/withFormik)
 
         - La valeur de la prop name des inputs doit etre la meme que celle renseigné dans mapPropsToValues
         -   Maintenant **value={this.state.authorInput}** deviendra value={this.props.values.author}
             Et on aura onChange={(event) => {this.setState({authorInput: event.target.value})}}
             qui sera remplacé par onChange={this.props.handleChange}
         - Maintenant tester avec le react developper tool si la prop values de l'objet FormAdd prend en considération les changements
+
+        -   Validation des données avant envoi 
+            -   On utilisera la propriété **errors**
+            -   On génere un objet error et a l'intérieur on vérifie l'intégrité des données :
+                   `validate: values => { `
+                        `const errors = {}; `
+                        `if(values.title.length < 3){`
+                        `    errors.title = "Le titre dois avoir au moins 3 caracères"`
+                        `}`
+                        `if(values.title.length > 15){`
+                        `    errors.title = "Le titre dois avoir moins de 15 caracères"`
+                        `}`
+
+                        `return errors`
+                   `}`
+            -   Puis on envoie le msg en dessous du champs title :
+                `{this.props.errors.title && <span style={{color:'red'}}> {this.props.errors.title}</span>}`
+            -   On vérifie via react developper tools si l'objet errors récupère le msg d'erreur 
+            -   Pour afficher le msg à l'utilisateur :
+                {this.props.errors.title && <span style={{color:red}}>{this.props.errors.title}</span>}
+            -   On utilise la propriété blur et la methode blur afin de na pas avoir un msg d'erreur écrit
+                directement sans avoir commencé a saire les datas
 
         
 

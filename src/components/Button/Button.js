@@ -7,7 +7,7 @@ const Button = (props) => {
 
     return(
         <>
-            <button className={btnCss} onClick={props.clic}>{props.children}</button>
+            <button className={btnCss} type="submit" onClick={props.clic}>{props.children}</button>
         </>
     )
 }
